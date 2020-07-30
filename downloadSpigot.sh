@@ -1,4 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
+wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+
 if [ -f ./BuildTools.jar ]; then
 
 	echo "BuildTools.jar found. Checking for available versions of spigot:"
