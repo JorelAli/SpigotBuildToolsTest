@@ -30,9 +30,17 @@ jobs:
     # Runs a single command using the runners shell
     - name: Run a one-line script
       run: echo Hello, world!
-    
+  
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+      
     - name: Download a tonne of spigot
-      uses: SpraxDev/Action-Spigot@v1
+      uses: SpraxDev/Action-SpigotMC@v1
       with:
         versions: 1.13, 1.13.1, 1.13.2, 1.14, 1.14.3, 1.14.4, 1.15, 1.16.1, 1.16.2, 1.16.4
         target: Spigot
@@ -41,6 +49,7 @@ jobs:
         disableJavaCheck: false
         forceRun: false
         threads: -1
+        buildToolProvider: SpraxDev
 
     # Runs a set of commands using the runners shell
     #- name: Run a multi-line script
